@@ -4,8 +4,6 @@ workflows:
     max_build_duration: 60
     environment:
       xcode: latest
-      cocoapods: default
-      node: default
     scripts:
       - name: Set up
         script: |
