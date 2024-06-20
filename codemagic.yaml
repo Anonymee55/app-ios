@@ -11,13 +11,14 @@ workflows:
       - name: Build
         script: |
           mkdir -p Payload
-          xcrun -sdk iphoneos swiftc main.swift -o Payload/BonjourApp
+          xcrun --sdk iphoneos swiftc -target arm64-apple-ios14.0 main.swift -o Payload/BonjourApp
       - name: Package
         script: |
           cd Payload
-          zip -r BonjourApp.ipa .
+          zip -r BonjourApp.ipa BonjourApp
     artifacts:
       - Payload/BonjourApp.ipa
+
 
     publishing:
       email:
