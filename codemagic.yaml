@@ -1,3 +1,27 @@
-git add codemagic.yaml
-git commit -m 'Add first workflow'
-git push
+workflows:
+  ios-workflow:
+    name: Build and Test iOS
+    max_build_duration: 60
+    environment:
+      xcode: latest
+      cocoapods: default
+      node: default
+    scripts:
+      - name: Set up
+        script: |
+          echo "Setting up the environment"
+      - name: Build
+        script: |
+          mkdir -p Payload
+          xcrun -sdk iphoneos swiftc main.swift -o Payload/BonjourApp
+      - name: Package
+        script: |
+          cd Payload
+          zip -r BonjourApp.ipa .
+    artifacts:
+      - Payload/BonjourApp.ipa
+
+    publishing:
+      email:
+        recipients:
+          - muggjosef91@gmail.com
